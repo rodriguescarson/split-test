@@ -3,12 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Split Test</title>
+  <title>Split Test Lab</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --fg: #1a1a1a;
+      --bg: #ffffff;
+      --muted: #5f5f5f;
+      --accent: #2f6fed;
+      --border: #e4e4e4;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #f2f2f2;
+        --bg: #121212;
+        --muted: #a8a8a8;
+        --accent: #6fa0ff;
+        --border: #2c2c2c;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2.5rem 1.5rem 4rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    main {
+      max-width: 40rem;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin-top: 0;
+    }
+    h2 {
+      margin-top: 2.5rem;
+      font-size: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+    }
+    code {
+      background: var(--border);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    ul {
+      padding-left: 1.25rem;
+    }
+    li {
+      margin-bottom: 0.4rem;
+    }
+    footer {
+      margin-top: 3rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Split Test Lab</h1>
-  <p>Three lines, three authors — this page exists to test commit attribution.</p>
-  <h2>How it works</h2>
-  <p>Run <code>git blame index.html</code> — each section was committed by a different author.</p>
+  <main>
+    <h1>Split Test Lab</h1>
+    <p class="subtitle">Notes and a working checklist for running A/B tests without fooling yourself.</p>
+
+    <p>Three lines, three authors: this page exists to test commit attribution.</p>
+
+    <h2>What a split test actually measures</h2>
+    <p>
+      A split test compares two or more variants of the same thing, like a headline, a
+      button color, or an onboarding flow, by showing each variant to a separate,
+      randomly assigned group of users and comparing outcomes. The point isn't to
+      prove a variant is "better" in the abstract; it's to estimate the effect of
+      one specific change on one specific metric, under the traffic and audience
+      you actually have right now.
+    </p>
+
+    <h2>Before you start</h2>
+    <ul>
+      <li>Write down the metric you're optimizing for, in advance, not after glancing at results.</li>
+      <li>Pick a minimum sample size or run duration up front, and stick to it.</li>
+      <li>Make sure assignment is random and sticky (a user shouldn't flip variants mid-session).</li>
+      <li>Only change one variable per test, or you can't attribute the effect.</li>
+    </ul>
+
+    <h2>Common pitfalls</h2>
+    <ul>
+      <li><strong>Peeking:</strong> checking results daily and stopping the moment one variant looks ahead inflates false positives.</li>
+      <li><strong>Underpowered tests:</strong> small sample sizes produce noisy results that look like signal.</li>
+      <li><strong>Novelty effects:</strong> a new variant can outperform briefly just because it's new, then regress.</li>
+      <li><strong>Metric mismatch:</strong> optimizing clicks when the real goal is retention or revenue.</li>
+    </ul>
+
+    <h2>Example variant table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>Change</th>
+          <th>Hypothesis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A (control)</td>
+          <td>Existing signup CTA</td>
+          <td>Baseline conversion rate</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>Shorter form, fewer fields</td>
+          <td>Lower friction increases completion</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td>Social proof above the fold</td>
+          <td>Trust signals reduce drop-off</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>How it works</h2>
+    <p>Run <code>git blame index.html</code>: each section was committed by a different author.</p>
+
+    <h2>Reading the result</h2>
+    <p>
+      A statistically significant result tells you the observed difference is
+      unlikely to be pure chance. It does not tell you the effect will hold
+      forever, generalize to a different audience, or matter enough to be worth
+      shipping. Treat every test result as a local estimate, not a universal
+      truth, and re-test meaningful changes after the audience or product shifts.
+    </p>
+
+    <footer>
+      <p>split-test: a minimal sandbox, no build step required.</p>
+    </footer>
+  </main>
 </body>
 </html>
